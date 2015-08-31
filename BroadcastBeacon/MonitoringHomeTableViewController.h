@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MonitoringHomeTableViewController.h
 //  BroadcastBeacon
 //
 //  Created by mookyung song on 8/31/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MonitoringHomeTableViewController : UITableViewController
 
 @end
-

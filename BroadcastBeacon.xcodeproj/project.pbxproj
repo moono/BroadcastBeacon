@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		2ABE75771B9419E600298EE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75761B9419E600298EE9 /* main.m */; };
 		2ABE757A1B9419E600298EE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75791B9419E600298EE9 /* AppDelegate.m */; };
-		2ABE757D1B9419E600298EE9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE757C1B9419E600298EE9 /* ViewController.m */; };
 		2ABE75801B9419E600298EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE757E1B9419E600298EE9 /* Main.storyboard */; };
 		2ABE75821B9419E600298EE9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE75811B9419E600298EE9 /* Images.xcassets */; };
 		2ABE75851B9419E600298EE9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE75831B9419E600298EE9 /* LaunchScreen.xib */; };
 		2ABE75911B9419E600298EE9 /* BroadcastBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75901B9419E600298EE9 /* BroadcastBeaconTests.m */; };
+		2ABE759C1B941A1000298EE9 /* MonitoringHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE759B1B941A1000298EE9 /* MonitoringHomeTableViewController.m */; };
+		2ABE759F1B941A2E00298EE9 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE759E1B941A2E00298EE9 /* FileViewController.m */; };
+		2ABE75A21B941A4700298EE9 /* HTTPCommunicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75A11B941A4600298EE9 /* HTTPCommunicationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +34,18 @@
 		2ABE75761B9419E600298EE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2ABE75781B9419E600298EE9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2ABE75791B9419E600298EE9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2ABE757B1B9419E600298EE9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2ABE757C1B9419E600298EE9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2ABE757F1B9419E600298EE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2ABE75811B9419E600298EE9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2ABE75841B9419E600298EE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2ABE758A1B9419E600298EE9 /* BroadcastBeaconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BroadcastBeaconTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ABE758F1B9419E600298EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ABE75901B9419E600298EE9 /* BroadcastBeaconTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BroadcastBeaconTests.m; sourceTree = "<group>"; };
+		2ABE759A1B941A1000298EE9 /* MonitoringHomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitoringHomeTableViewController.h; sourceTree = "<group>"; };
+		2ABE759B1B941A1000298EE9 /* MonitoringHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitoringHomeTableViewController.m; sourceTree = "<group>"; };
+		2ABE759D1B941A2E00298EE9 /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		2ABE759E1B941A2E00298EE9 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
+		2ABE75A01B941A4600298EE9 /* HTTPCommunicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPCommunicationViewController.h; sourceTree = "<group>"; };
+		2ABE75A11B941A4600298EE9 /* HTTPCommunicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPCommunicationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +89,16 @@
 			children = (
 				2ABE75781B9419E600298EE9 /* AppDelegate.h */,
 				2ABE75791B9419E600298EE9 /* AppDelegate.m */,
-				2ABE757B1B9419E600298EE9 /* ViewController.h */,
-				2ABE757C1B9419E600298EE9 /* ViewController.m */,
 				2ABE757E1B9419E600298EE9 /* Main.storyboard */,
 				2ABE75811B9419E600298EE9 /* Images.xcassets */,
 				2ABE75831B9419E600298EE9 /* LaunchScreen.xib */,
 				2ABE75741B9419E600298EE9 /* Supporting Files */,
+				2ABE759A1B941A1000298EE9 /* MonitoringHomeTableViewController.h */,
+				2ABE759B1B941A1000298EE9 /* MonitoringHomeTableViewController.m */,
+				2ABE759D1B941A2E00298EE9 /* FileViewController.h */,
+				2ABE759E1B941A2E00298EE9 /* FileViewController.m */,
+				2ABE75A01B941A4600298EE9 /* HTTPCommunicationViewController.h */,
+				2ABE75A11B941A4600298EE9 /* HTTPCommunicationViewController.m */,
 			);
 			path = BroadcastBeacon;
 			sourceTree = "<group>";
@@ -219,9 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ABE757D1B9419E600298EE9 /* ViewController.m in Sources */,
 				2ABE757A1B9419E600298EE9 /* AppDelegate.m in Sources */,
+				2ABE75A21B941A4700298EE9 /* HTTPCommunicationViewController.m in Sources */,
 				2ABE75771B9419E600298EE9 /* main.m in Sources */,
+				2ABE759F1B941A2E00298EE9 /* FileViewController.m in Sources */,
+				2ABE759C1B941A1000298EE9 /* MonitoringHomeTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
