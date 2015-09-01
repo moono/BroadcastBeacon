@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A6209201B95288600610633 /* MooHTTPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A62091E1B95288600610633 /* MooHTTPCommunication.m */; };
 		2A6209231B95291700610633 /* OpenFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6209221B95291700610633 /* OpenFileViewController.m */; };
+		2A6209261B95681900610633 /* IDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6209251B95681900610633 /* IDViewController.m */; };
 		2ABE75771B9419E600298EE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75761B9419E600298EE9 /* main.m */; };
 		2ABE757A1B9419E600298EE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75791B9419E600298EE9 /* AppDelegate.m */; };
 		2ABE75801B9419E600298EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE757E1B9419E600298EE9 /* Main.storyboard */; };
@@ -51,6 +52,8 @@
 		2A62091E1B95288600610633 /* MooHTTPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MooHTTPCommunication.m; sourceTree = "<group>"; };
 		2A6209211B95291700610633 /* OpenFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenFileViewController.h; sourceTree = "<group>"; };
 		2A6209221B95291700610633 /* OpenFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenFileViewController.m; sourceTree = "<group>"; };
+		2A6209241B95681900610633 /* IDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDViewController.h; sourceTree = "<group>"; };
+		2A6209251B95681900610633 /* IDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDViewController.m; sourceTree = "<group>"; };
 		2ABE75711B9419E600298EE9 /* BroadcastBeacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BroadcastBeacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ABE75751B9419E600298EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ABE75761B9419E600298EE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				2ABE75D91B94369A00298EE9 /* ApplicationData.m */,
 				2A6209211B95291700610633 /* OpenFileViewController.h */,
 				2A6209221B95291700610633 /* OpenFileViewController.m */,
+				2A6209241B95681900610633 /* IDViewController.h */,
+				2A6209251B95681900610633 /* IDViewController.m */,
 			);
 			path = BroadcastBeacon;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				2ABE75CE1B941BFC00298EE9 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				2A6209201B95288600610633 /* MooHTTPCommunication.m in Sources */,
 				2ABE757A1B9419E600298EE9 /* AppDelegate.m in Sources */,
+				2A6209261B95681900610633 /* IDViewController.m in Sources */,
 				2ABE75A21B941A4700298EE9 /* HTTPCommunicationViewController.m in Sources */,
 				2ABE75771B9419E600298EE9 /* main.m in Sources */,
 				2ABE75CD1B941BFC00298EE9 /* IQKeyboardManager.m in Sources */,
