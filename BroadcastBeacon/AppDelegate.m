@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "ApplicationData.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // get unique id
+    NSString *uniqueID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSLog(@"This device's ID:%@", uniqueID);
+    ApplicationData *appData = [ApplicationData defaultInstance];
+    [appData setValue:uniqueID forKey:@"uniqueId"];
     
     // set notification
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil]];

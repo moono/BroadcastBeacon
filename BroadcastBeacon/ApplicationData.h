@@ -21,6 +21,7 @@
 @interface ApplicationData : NSObject
 
 // propeties
+@property (nonatomic, copy) NSString *uniqueId;
 @property (nonatomic, copy) NSString *uuid;
 @property (nonatomic, copy) NSString *regionIdentifier;
 
