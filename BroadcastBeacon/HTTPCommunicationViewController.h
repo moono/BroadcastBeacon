@@ -10,4 +10,12 @@
 
 @interface HTTPCommunicationViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *urlTextField;
+@property (weak, nonatomic) IBOutlet UIButton *postOnceButton;
+@property (weak, nonatomic) IBOutlet UIButton *keepPostButton;
+@property (weak, nonatomic) IBOutlet UITextView *receivedResponseTextView;
+
+
+- (IBAction)postOnce:(id)sender;
+- (IBAction)keepPosting:(id)sender;
 @end

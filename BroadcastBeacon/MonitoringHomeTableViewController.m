@@ -88,14 +88,10 @@
     for (CLBeacon *beacon in beacons) {
         // extract information & save as array of NSDictionary
         NSString *proximity = [appData convertProximityToString:beacon.proximity];
-        NSString *time = [appData getCurrentTimeString];
         
         [_beaconsInRange addObject:@{kMajor : beacon.major,
-                                     kMinor : beacon.minor,
                                      kAccuracy : @(beacon.accuracy),
-                                     kProximity : proximity,
-                                     kRssi : @(beacon.rssi),
-                                     kTime : time}];
+                                     kProximity : proximity}];
     }
     
     // update UI

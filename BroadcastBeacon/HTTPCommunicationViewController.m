@@ -15,17 +15,26 @@
 // add import for application data
 #import "ApplicationData.h"
 
+// add import for HTTP service
+#import "MooHTTPCommunication.h"
+
 
 @interface HTTPCommunicationViewController () <ESTBeaconManagerDelegate>
 
 // Propeties that will be sent to other views
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *regionIdentifier;
+@property (nonatomic, strong) NSString *deviceUniqueId;
 
 // properties for Estimote beacon
 @property (nonatomic, strong) ESTBeaconManager *beaconManager;
 @property (nonatomic, strong) CLBeaconRegion *beaconRegion;
 @property (nonatomic, strong) NSMutableArray *beaconsInRange;   // these are array of NSDictionary
+
+// for posting
+@property (nonatomic) BOOL isSending;
+@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSMutableArray *beaconsToPost;
 
 @end
 
@@ -39,6 +48,7 @@
     ApplicationData *appData = [ApplicationData defaultInstance];
     _uuid = [appData uuid];
     _regionIdentifier = [appData regionIdentifier];
+    _deviceUniqueId = [appData uniqueId];
     
     // initialize beacon properties
     _beaconsInRange = [[NSMutableArray alloc] init];
@@ -48,6 +58,14 @@
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:_uuid];         // Estimote beacon's UUID are the same on factory settings
     _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:_regionIdentifier];
     
+    // for posting
+    _isSending = NO;
+    _url = [NSURL URLWithString:@"http://jsonplaceholder.typicode.com/posts"];
+    [_urlTextField setText:[_url absoluteString]];
+    _beaconsToPost = [[NSMutableArray alloc] init];
+    
+    // add event listner
+    [_urlTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,4 +95,103 @@
 }
 */
 
+#pragma mark - UITextField
+- (void)textFieldDidChange:(UITextField *)textField {
+    _url = [NSURL URLWithString:textField.text];
+}
+
+#pragma mark - ESTBeaconManager delegate
+- (void)beaconManager:(id)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+    // remove all list
+    [_beaconsInRange removeAllObjects];
+    
+    ApplicationData *appData = [ApplicationData defaultInstance];
+    
+    for (CLBeacon *beacon in beacons) {
+        // extract information & save as array of NSDictionary
+        NSString *proximity = [appData convertProximityToString:beacon.proximity];
+        NSString *time = [appData getCurrentTimeString];
+        
+        [_beaconsInRange addObject:@{kDeviceID : _deviceUniqueId,
+                                     kMajor : beacon.major,
+                                     kMinor : beacon.minor,
+                                     kAccuracy : @(beacon.accuracy),
+                                     kProximity : proximity,
+                                     kRssi : @(beacon.rssi),
+                                     kTime : time}];
+    }
+    
+    // send trajectory to url
+    if (_isSending == TRUE) {
+        // add beacon list to the end of _beaconsToPost
+        [_beaconsToPost addObjectsFromArray:_beaconsInRange];
+    }
+}
+
+#pragma mark - my methods
+- (void)postingMethod {
+    if (_isSending && [_beaconsToPost count] > 0) {
+        // prepare for HTTP communication
+        MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
+        
+        [http postURL:_url params:_beaconsToPost successBlock:^(NSData *response)
+         {
+             [self setTextViewString:response];
+             
+             // clear contents
+             [_beaconsToPost removeAllObjects];
+         }];
+        
+        [self performSelector:@selector(postingMethod) withObject:self afterDelay:5.0];
+    }
+}
+
+- (void)setTextViewString:(NSData *)data {
+    NSError *error;
+    id json = [NSJSONSerialization JSONObjectWithData:data
+                                              options:kNilOptions
+                                                error:&error];
+    if (data) {
+        if(json && !error) {
+            NSString *jsonString = [NSString stringWithFormat:@"%@", json];
+            NSLog(@"%@", jsonString);
+            [_receivedResponseTextView setText:jsonString];
+        }
+        else {
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", responseString);
+            [_receivedResponseTextView setText:responseString];
+        }
+    }
+    else {
+        NSLog(@"No response!!");
+        [_receivedResponseTextView setText:[NSString stringWithFormat:@"No response!!"]];
+    }
+}
+
+#pragma mark - action events
+- (IBAction)postOnce:(id)sender {
+    if ([_beaconsInRange count] > 0) {
+        // prepare for HTTP communication
+        MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
+        
+        [http postURL:_url params:_beaconsInRange successBlock:^(NSData *response)
+         {
+             [self setTextViewString:response];
+         }];
+    }
+}
+
+- (IBAction)keepPosting:(id)sender {
+    _isSending = !_isSending;
+    
+    // set UI & post data if needed
+    if (_isSending) {
+        [_keepPostButton setTitle:@"Stop posting!!" forState:UIControlStateNormal];
+        [self postingMethod];
+    }
+    else {
+        [_keepPostButton setTitle:@"Post data!!" forState:UIControlStateNormal];
+    }
+}
 @end
