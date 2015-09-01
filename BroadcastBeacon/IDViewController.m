@@ -22,8 +22,8 @@
     // Do any additional setup after loading the view.
     
     [_idTextField setText: [[ApplicationData defaultInstance] uniqueId]];
-    _idTextField.enabled = NO;
-    _idTextField.userInteractionEnabled = YES;
+    //_idTextField.enabled = NO;
+    //_idTextField.userInteractionEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning {

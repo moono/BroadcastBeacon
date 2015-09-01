@@ -53,6 +53,7 @@
     ApplicationData *appData = [ApplicationData defaultInstance];
     _uuid = [appData uuid];
     _regionIdentifier = [appData regionIdentifier];
+    [_textView setText:@""];
     
     // initialize beacon properties
     _beaconsInRange = [[NSMutableArray alloc] init];

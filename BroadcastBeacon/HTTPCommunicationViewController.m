@@ -49,6 +49,7 @@
     _uuid = [appData uuid];
     _regionIdentifier = [appData regionIdentifier];
     _deviceUniqueId = [appData uniqueId];
+    [_receivedResponseTextView setText:@""];
     
     // initialize beacon properties
     _beaconsInRange = [[NSMutableArray alloc] init];
@@ -130,17 +131,20 @@
 
 #pragma mark - my methods
 - (void)postingMethod {
-    if (_isSending && [_beaconsToPost count] > 0) {
-        // prepare for HTTP communication
-        MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
+    if (_isSending) {
+        if ([_beaconsToPost count] > 0) {
+            // prepare for HTTP communication
+            MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
+            
+            [http postURL:_url params:_beaconsToPost successBlock:^(NSData *response)
+             {
+                 [self setTextViewString:response];
+                 
+                 // clear contents
+                 [_beaconsToPost removeAllObjects];
+             }];
+        }
         
-        [http postURL:_url params:_beaconsToPost successBlock:^(NSData *response)
-         {
-             [self setTextViewString:response];
-             
-             // clear contents
-             [_beaconsToPost removeAllObjects];
-         }];
         
         [self performSelector:@selector(postingMethod) withObject:self afterDelay:5.0];
     }

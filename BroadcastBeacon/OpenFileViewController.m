@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [_textView setText:@""];
     [self setTextViewContents:_fileName];
 }
 

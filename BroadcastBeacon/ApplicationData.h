@@ -17,7 +17,7 @@
 #define kRssi @"rssi"               // number
 #define kProximity @"proximity"     // string
 #define kTime  @"time"              // string
-#define kDeviceID @"ID"             // string
+#define kDeviceID @"id"             // string
 
 @interface ApplicationData : NSObject
 
