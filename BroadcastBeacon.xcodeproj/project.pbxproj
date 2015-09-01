@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A6209201B95288600610633 /* MooHTTPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A62091E1B95288600610633 /* MooHTTPCommunication.m */; };
+		2A6209231B95291700610633 /* OpenFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6209221B95291700610633 /* OpenFileViewController.m */; };
 		2ABE75771B9419E600298EE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75761B9419E600298EE9 /* main.m */; };
 		2ABE757A1B9419E600298EE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75791B9419E600298EE9 /* AppDelegate.m */; };
 		2ABE75801B9419E600298EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE757E1B9419E600298EE9 /* Main.storyboard */; };
@@ -31,6 +33,7 @@
 		2ABE75D41B941BFC00298EE9 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75C41B941BFC00298EE9 /* IQUIView+IQKeyboardToolbar.m */; };
 		2ABE75D51B941BFC00298EE9 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE75C71B941BFC00298EE9 /* IQKeyboardManager.bundle */; };
 		2ABE75D71B941C2000298EE9 /* EstimoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABE75D61B941C2000298EE9 /* EstimoteSDK.framework */; };
+		2ABE75DA1B94369A00298EE9 /* ApplicationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABE75D91B94369A00298EE9 /* ApplicationData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A62091D1B95288600610633 /* MooHTTPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MooHTTPCommunication.h; sourceTree = "<group>"; };
+		2A62091E1B95288600610633 /* MooHTTPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MooHTTPCommunication.m; sourceTree = "<group>"; };
+		2A6209211B95291700610633 /* OpenFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenFileViewController.h; sourceTree = "<group>"; };
+		2A6209221B95291700610633 /* OpenFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenFileViewController.m; sourceTree = "<group>"; };
 		2ABE75711B9419E600298EE9 /* BroadcastBeacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BroadcastBeacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ABE75751B9419E600298EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ABE75761B9419E600298EE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +99,8 @@
 		2ABE75C51B941BFC00298EE9 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
 		2ABE75C71B941BFC00298EE9 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
 		2ABE75D61B941C2000298EE9 /* EstimoteSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EstimoteSDK.framework; sourceTree = "<group>"; };
+		2ABE75D81B94369A00298EE9 /* ApplicationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationData.h; sourceTree = "<group>"; };
+		2ABE75D91B94369A00298EE9 /* ApplicationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +145,8 @@
 		2ABE75731B9419E600298EE9 /* BroadcastBeacon */ = {
 			isa = PBXGroup;
 			children = (
+				2A62091D1B95288600610633 /* MooHTTPCommunication.h */,
+				2A62091E1B95288600610633 /* MooHTTPCommunication.m */,
 				2ABE75781B9419E600298EE9 /* AppDelegate.h */,
 				2ABE75791B9419E600298EE9 /* AppDelegate.m */,
 				2ABE757E1B9419E600298EE9 /* Main.storyboard */,
@@ -148,6 +159,10 @@
 				2ABE759E1B941A2E00298EE9 /* FileViewController.m */,
 				2ABE75A01B941A4600298EE9 /* HTTPCommunicationViewController.h */,
 				2ABE75A11B941A4600298EE9 /* HTTPCommunicationViewController.m */,
+				2ABE75D81B94369A00298EE9 /* ApplicationData.h */,
+				2ABE75D91B94369A00298EE9 /* ApplicationData.m */,
+				2A6209211B95291700610633 /* OpenFileViewController.h */,
+				2A6209221B95291700610633 /* OpenFileViewController.m */,
 			);
 			path = BroadcastBeacon;
 			sourceTree = "<group>";
@@ -364,13 +379,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A6209231B95291700610633 /* OpenFileViewController.m in Sources */,
 				2ABE75C81B941BFC00298EE9 /* IQNSArray+Sort.m in Sources */,
 				2ABE75CE1B941BFC00298EE9 /* IQKeyboardReturnKeyHandler.m in Sources */,
+				2A6209201B95288600610633 /* MooHTTPCommunication.m in Sources */,
 				2ABE757A1B9419E600298EE9 /* AppDelegate.m in Sources */,
 				2ABE75A21B941A4700298EE9 /* HTTPCommunicationViewController.m in Sources */,
 				2ABE75771B9419E600298EE9 /* main.m in Sources */,
 				2ABE75CD1B941BFC00298EE9 /* IQKeyboardManager.m in Sources */,
 				2ABE75CA1B941BFC00298EE9 /* IQUIView+Hierarchy.m in Sources */,
+				2ABE75DA1B94369A00298EE9 /* ApplicationData.m in Sources */,
 				2ABE75D41B941BFC00298EE9 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				2ABE75C91B941BFC00298EE9 /* IQUITextFieldView+Additions.m in Sources */,
 				2ABE75CF1B941BFC00298EE9 /* IQSegmentedNextPrevious.m in Sources */,
@@ -584,6 +602,7 @@
 				2ABE75961B9419E600298EE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2ABE75971B9419E600298EE9 /* Build configuration list for PBXNativeTarget "BroadcastBeaconTests" */ = {
 			isa = XCConfigurationList;
@@ -592,6 +611,7 @@
 				2ABE75991B9419E600298EE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -11,17 +11,19 @@
 // add import for Estimote SDK
 #import <EstimoteSDK/EstimoteSDK.h>
 
+// add import for application data
+#import "ApplicationData.h"
 
-// add defines for easy NSDictionary access
-#define kMajor @"major"             // number
-#define kMinor @"minor"             // number
-#define kAccuracy @"accuracy"       // number
-#define kRssi @"rssi"               // number
-#define kProximity @"proximity"     // string
-#define kTime  @"time"              // string
+// add import for other views
+#import "FileViewController.h"
+#import "HTTPCommunicationViewController.h"
 
 
-@interface MonitoringHomeTableViewController () <ESTBeaconManagerDelegate>
+@interface MonitoringHomeTableViewController () <ESTBeaconManagerDelegate, UITabBarControllerDelegate>
+
+// Propeties that will be sent to other views
+@property (nonatomic, strong) NSString *uuid;
+@property (nonatomic, strong) NSString *regionIdentifier;
 
 // properties for Estimote beacon
 @property (nonatomic, strong) ESTBeaconManager *beaconManager;
@@ -42,13 +44,18 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    // initialize strings
+    ApplicationData *appData = [ApplicationData defaultInstance];
+    _uuid = [appData uuid];
+    _regionIdentifier = [appData regionIdentifier];
+    
     // initialize beacon properties
     _beaconsInRange = [[NSMutableArray alloc] init];
     _beaconManager = [[ESTBeaconManager alloc] init];
     _beaconManager.delegate = self;
     
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];         // Estimote beacon's UUID are the same on factory settings
-    _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"ranged region"];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:_uuid];         // Estimote beacon's UUID are the same on factory settings
+    _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:_regionIdentifier];
     
     // request authorization
     [_beaconManager requestAlwaysAuthorization];
@@ -57,11 +64,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_beaconManager startRangingBeaconsInRegion:_beaconRegion];
+    NSLog(@"Home-viewWillAppear");
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_beaconManager stopRangingBeaconsInRegion:_beaconRegion];
+    NSLog(@"Home-viewWillDisappear");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,58 +78,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - for segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    UIViewController *destination = [segue destinationViewController];
-//    
-//    if ([segue.identifier isEqualToString:@"viewFileSegue"]) {
-//        destination = [segue.destinationViewController topViewController];
-//    }
-//    
-//    [destination setValue:self forKey:@"delegate"];
-}
-
-#pragma mark - my methods
-- (NSString *)convertProximityToString:(CLProximity)proximity {
-    NSString *returnString = nil;
-    switch (proximity) {
-        case CLProximityUnknown:
-            returnString = @"Unknown";
-            break;
-        case CLProximityImmediate:
-            returnString = @"Immediate";
-            break;
-        case CLProximityNear:
-            returnString = @"Near";
-            break;
-        case CLProximityFar:
-            returnString = @"Far";
-            break;
-        default:
-            returnString = @"Unknown";
-            break;
-    }
-    
-    return returnString;
-}
-
-- (NSString *)getCurrentTimeString {
-    // get current date/time
-    long long timeInMs = (long long)([[NSDate date] timeIntervalSince1970] * 1000);
-    NSString *now = [@(timeInMs) stringValue];
-    
-    return now;
-}
-
 #pragma mark - ESTBeaconManager delegate
 - (void)beaconManager:(id)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     // remove all list
     [_beaconsInRange removeAllObjects];
     
+    ApplicationData *appData = [ApplicationData defaultInstance];
+    
     for (CLBeacon *beacon in beacons) {
         // extract information & save as array of NSDictionary
-        NSString *proximity = [self convertProximityToString:beacon.proximity];
-        NSString *time = [self getCurrentTimeString];
+        NSString *proximity = [appData convertProximityToString:beacon.proximity];
+        NSString *time = [appData getCurrentTimeString];
         
         [_beaconsInRange addObject:@{kMajor : beacon.major,
                                      kMinor : beacon.minor,
@@ -129,6 +97,9 @@
                                      kRssi : @(beacon.rssi),
                                      kTime : time}];
     }
+    
+    // update UI
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

@@ -8,7 +8,24 @@
 
 #import "HTTPCommunicationViewController.h"
 
-@interface HTTPCommunicationViewController ()
+
+// add import for Estimote SDK
+#import <EstimoteSDK/EstimoteSDK.h>
+
+// add import for application data
+#import "ApplicationData.h"
+
+
+@interface HTTPCommunicationViewController () <ESTBeaconManagerDelegate>
+
+// Propeties that will be sent to other views
+@property (nonatomic, strong) NSString *uuid;
+@property (nonatomic, strong) NSString *regionIdentifier;
+
+// properties for Estimote beacon
+@property (nonatomic, strong) ESTBeaconManager *beaconManager;
+@property (nonatomic, strong) CLBeaconRegion *beaconRegion;
+@property (nonatomic, strong) NSMutableArray *beaconsInRange;   // these are array of NSDictionary
 
 @end
 
@@ -17,6 +34,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // initialize strings
+    ApplicationData *appData = [ApplicationData defaultInstance];
+    _uuid = [appData uuid];
+    _regionIdentifier = [appData regionIdentifier];
+    
+    // initialize beacon properties
+    _beaconsInRange = [[NSMutableArray alloc] init];
+    _beaconManager = [[ESTBeaconManager alloc] init];
+    _beaconManager.delegate = self;
+    
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:_uuid];         // Estimote beacon's UUID are the same on factory settings
+    _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:_regionIdentifier];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [_beaconManager startRangingBeaconsInRegion:_beaconRegion];
+    NSLog(@"HTTP-viewWillAppear");
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [_beaconManager stopRangingBeaconsInRegion:_beaconRegion];
+    NSLog(@"HTTP-viewWillDisappear");
 }
 
 - (void)didReceiveMemoryWarning {

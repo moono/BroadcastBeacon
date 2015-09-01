@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface FileViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
+- (IBAction)startStopSaving:(id)sender;
+- (IBAction)clearFileContents:(id)sender;
 @end
