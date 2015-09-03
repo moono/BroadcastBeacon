@@ -19,6 +19,8 @@
 #import "MooHTTPCommunication.h"
 
 
+#define SEND_EVERY_5_SECONDS 0
+
 @interface HTTPCommunicationViewController () <ESTBeaconManagerDelegate>
 
 // Propeties that will be sent to other views
@@ -34,7 +36,9 @@
 // for posting
 @property (nonatomic) BOOL isSending;
 @property (nonatomic, strong) NSURL *url;
+#if SEND_EVERY_5_SECONDS
 @property (nonatomic, strong) NSMutableArray *beaconsToPost;
+#endif
 
 @end
 
@@ -61,9 +65,11 @@
     
     // for posting
     _isSending = NO;
-    _url = [NSURL URLWithString:@"http://jsonplaceholder.typicode.com/posts"];
+    _url = [NSURL URLWithString:@"http://192.168.0.2:3000/"];
     [_urlTextField setText:[_url absoluteString]];
+#if SEND_EVERY_5_SECONDS
     _beaconsToPost = [[NSMutableArray alloc] init];
+#endif
     
     // add event listner
     [_urlTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -124,32 +130,24 @@
     
     // send trajectory to url
     if (_isSending == TRUE) {
+#if SEND_EVERY_5_SECONDS
         // add beacon list to the end of _beaconsToPost
         [_beaconsToPost addObjectsFromArray:_beaconsInRange];
+#else
+        if ([_beaconsInRange count] > 0) {
+            // prepare for HTTP communication
+            MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
+            
+            [http postURL:_url params:_beaconsInRange successBlock:^(NSData *response)
+             {
+                 [self setTextViewString:response];
+             }];
+        }
+#endif
     }
 }
 
 #pragma mark - my methods
-- (void)postingMethod {
-    if (_isSending) {
-        if ([_beaconsToPost count] > 0) {
-            // prepare for HTTP communication
-            MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
-            
-            [http postURL:_url params:_beaconsToPost successBlock:^(NSData *response)
-             {
-                 [self setTextViewString:response];
-                 
-                 // clear contents
-                 [_beaconsToPost removeAllObjects];
-             }];
-        }
-        
-        
-        [self performSelector:@selector(postingMethod) withObject:self afterDelay:5.0];
-    }
-}
-
 - (void)setTextViewString:(NSData *)data {
     NSError *error;
     id json = [NSJSONSerialization JSONObjectWithData:data
@@ -173,6 +171,28 @@
     }
 }
 
+#if SEND_EVERY_5_SECONDS
+- (void)postingMethod {
+    if (_isSending) {
+        if ([_beaconsToPost count] > 0) {
+            // prepare for HTTP communication
+            MooHTTPCommunication *http = [[MooHTTPCommunication alloc] init];
+            
+            [http postURL:_url params:_beaconsToPost successBlock:^(NSData *response)
+             {
+                 [self setTextViewString:response];
+                 
+                 // clear contents
+                 [_beaconsToPost removeAllObjects];
+             }];
+        }
+        
+        
+        [self performSelector:@selector(postingMethod) withObject:self afterDelay:5.0];
+    }
+}
+#endif
+
 #pragma mark - action events
 - (IBAction)postOnce:(id)sender {
     if ([_beaconsInRange count] > 0) {
@@ -192,7 +212,9 @@
     // set UI & post data if needed
     if (_isSending) {
         [_keepPostButton setTitle:@"Stop posting!!" forState:UIControlStateNormal];
+#if SEND_EVERY_5_SECONDS
         [self postingMethod];
+#endif
     }
     else {
         [_keepPostButton setTitle:@"Post data!!" forState:UIControlStateNormal];
